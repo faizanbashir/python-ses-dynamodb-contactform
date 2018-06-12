@@ -4,6 +4,7 @@ import json
 import os
 import time
 import uuid
+import decimal
 
 client = boto3.client('ses')
 sender = 'faizan.ibn.bashir@gmail.com'
@@ -27,6 +28,18 @@ def sendMail(event, context):
         print("Email sent! Message Id:"),
         print(response['MessageId'])
     return "Email sent!"
+
+def list(event, context):
+    table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
+
+    # fetch all records from database
+    result = table.scan()
+
+    #return response
+    return {
+        "statusCode": 200,
+        "body": result['Items']
+    }
 
 def saveToDynamoDB(data):
     timestamp = int(time.time() * 1000)

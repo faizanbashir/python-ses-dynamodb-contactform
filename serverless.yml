@@ -56,6 +56,18 @@ functions:
           response:
             headers:
               "Access-Control-Allow_Origin": "'*'"
+  list:
+    handler: handler.list
+    description: List all the contact form submissions
+    events:
+      - http:
+          path: list
+          method: get
+          integration: lambda
+          cors: true
+          response:
+            headers:
+              "Access-Control-Allow_Origin": "'*'"
 
 resources:
   Resources:
