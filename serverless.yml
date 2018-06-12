@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: python-ses-contact-form
+service: python-sesdynamodb-contactform
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -25,12 +25,23 @@ provider:
   stage: development
   memory: 1024
   timeout: 10
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
         - ses:SendEmail
         - ses:SendRawEmail
       Resource: "*"
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 functions:
   sendMail:
@@ -45,3 +56,22 @@ functions:
           response:
             headers:
               "Access-Control-Allow_Origin": "'*'"
+
+resources:
+  Resources:
+    ContactFormDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
