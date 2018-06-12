@@ -52,7 +52,16 @@ functions:
           path: sendMail
           method: post
           integration: lambda
-          cors: true
+          cors:
+            origins:
+                - '*'
+            headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+            allowCredentials: false  
           response:
             headers:
               "Access-Control-Allow_Origin": "'*'"
@@ -64,7 +73,16 @@ functions:
           path: list
           method: get
           integration: lambda
-          cors: true
+          cors:
+            origins:
+                - '*'
+            headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+            allowCredentials: false
           response:
             headers:
               "Access-Control-Allow_Origin": "'*'"
