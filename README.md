@@ -38,24 +38,31 @@ The service exposes 2 REST API endpoints:
 
 ### `deploy function` command
 Deploy only one function:
+
 	sls deploy function -f <function-name> -v
 
 ### `invoke` command
 Run a specific function with a provided input and get the logs
+
 	sls invoke -f <function-name> -p event.json -l
 Run a specific function without input and get the logs
+
 	sls invoke -f <function-name> -l
 
 ### `logs` command
 Tail the logs of a function:
+
 	sls logs -f <function-name> -t
 
 ### `info` command
 Information about the service (stage, region, endpoints, functions):
+
 	sls info
 
 ### `help` command
 Just use it on anything:
+
 	sls  help
 or
+
 	sls <command> --help
