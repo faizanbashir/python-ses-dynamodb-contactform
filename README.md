@@ -35,7 +35,10 @@ The service exposes 2 REST API endpoints:
 
 ### Invocation
 
-	curl <host>/sendMail
+	curl ---header "Content-Type: application/json" \
+        --request POST \
+        --data '{"firstname": "John", "lastname": "Doe", "email": "john@doe.com", "message": "Hi there"}'\
+        <host>/sendMail
 	curl <host>/list
 
 # Tips & Tricks
