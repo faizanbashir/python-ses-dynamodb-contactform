@@ -1,0 +1,28 @@
+{
+  "name": "python-ses-dynamodb-contactform",
+  "version": "1.0.0",
+  "description": "Serverless Framework SES and DynamoDB Contact Form",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faizanbashir/python-ses-dynamodb-contactform.git"
+  },
+  "keywords": [
+    "python",
+    "aws",
+    "aws-lambda",
+    "serverless",
+    "aws-ses",
+    "aws-dynamodb",
+    "serverless-framework"
+  ],
+  "author": "faizanbashir",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/faizanbashir/python-ses-dynamodb-contactform/issues"
+  },
+  "homepage": "https://github.com/faizanbashir/python-ses-dynamodb-contactform#readme"
+}
