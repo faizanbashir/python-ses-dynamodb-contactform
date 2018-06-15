@@ -1,8 +1,12 @@
 # Python SES DynamoDB Contact Form
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
 
 AWS SES DYNAMODB tutorial using Serverless Framework written in Python
+
+## Application Architecture
+[![Serverless Application Architecture](architecture.png)]
 
 ## Serverless Framework Setup
 | **Command** |**Description**|
