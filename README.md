@@ -6,7 +6,7 @@
 AWS SES DYNAMODB tutorial using Serverless Framework written in Python
 
 ## Application Architecture
-[![Serverless Application Architecture]](architecture.png)
+[![Serverless Application Architecture](architecture.png)]
 
 ## Serverless Framework Setup
 | **Command** |**Description**|
