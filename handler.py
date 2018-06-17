@@ -7,9 +7,9 @@ import uuid
 import decimal
 
 client = boto3.client('ses')
-sender = 'faizan.ibn.bashir@gmail.com'
-subject = 'Serverless Mail'
-configset = 'ConfigSet'
+sender = os.environ['SENDER_EMAIL']
+subject = os.environ['EMAIL_SUBJECT']
+configset = os.environ['CONFIG_SET']
 charset = 'UTF-8'
 
 dynamodb = boto3.resource('dynamodb')

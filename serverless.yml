@@ -27,6 +27,9 @@ provider:
   timeout: 10
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    SENDER_EMAIL: <verified-email-address>
+    EMAIL_SUBJECT: Serverless Mail
+    CONFIG_SET: ConfigSet
   iamRoleStatements:
     - Effect: "Allow"
       Action:
