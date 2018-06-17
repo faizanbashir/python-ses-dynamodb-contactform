@@ -19,7 +19,7 @@ def sendMail(event, context):
 
     try:
         data = event['body']
-        content = 'Message from ' + data['firstname'] + ' ' + data['lastname'] + ', sez: ' + data['message']
+        content = 'Message from ' + data['firstname'] + ' ' + data['lastname'] + ',\nMessage Contents: ' + data['message']
         saveToDynamoDB(data)
         response = sendMailToUser(data, content)
     except ClientError as e:
