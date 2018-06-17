@@ -20,10 +20,10 @@ service: python-sesdynamodb-contactform
 provider:
   name: aws
   runtime: python2.7
-  region: us-east-1
-  profile: mysticUser
+  region: <region>
+  profile: <user>
   stage: development
-  memory: 1024
+  memory: 128
   timeout: 10
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
