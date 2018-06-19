@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Teko';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Teko Regular'), local('Teko-Regular'), url(https://fonts.gstatic.com/s/teko/v7/LYjNdG7kmE0gfaN9oA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Teko';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Teko Bold'), local('Teko-Bold'), url(https://fonts.gstatic.com/s/teko/v7/LYjCdG7kmE0gdRhYsCRgrQ.ttf) format('truetype');
+}

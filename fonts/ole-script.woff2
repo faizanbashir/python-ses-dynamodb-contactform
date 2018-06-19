@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Oleo Script';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oleo Script'), local('OleoScript-Regular'), url(https://fonts.gstatic.com/s/oleoscript/v6/rax5HieDvtMOe0iICsUccChdu0o.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Oleo Script';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Oleo Script Bold'), local('OleoScript-Bold'), url(https://fonts.gstatic.com/s/oleoscript/v6/raxkHieDvtMOe0iICsUccCDmnlrf0T4.ttf) format('truetype');
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Serverless Lambda Contact Form</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="images/favicon.ico" rel="icon">
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+    
+        <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <section id="contact">
+			<div class="section-content">
+				<h1 class="section-header">Serverless Framework Contact Form</h1>
+				<h3 id="status" style="display: none;">Lorem Ipsum is simply dummy text of the printing and typesetting industry</h3>
+			</div>
+			<div class="contact-section">
+			<div class="container">
+				<form id="serverless-form" action="#">
+					<div class="col-md-6 form-line">
+			  			<div class="form-group">
+			  				<label for="firstname">First name</label>
+					    	<input type="text" class="form-control" autocomplete="given-name" id="firstname" name="firstname" placeholder=" Enter First Name" required>
+                        </div>
+                        <div class="form-group">
+					    	<label for="lastname">Last name</label>
+					    	<input type="text" class="form-control" autocomplete="family-name" id="lastname" name="lastname" placeholder=" Enter Last Name" required>
+			  			</div>
+				  		<div class="form-group">
+					    	<label for="exampleInputEmail">Email Address</label>
+					    	<input type="email" class="form-control" autocomplete="email" id="exampleInputEmail" name="email" placeholder=" Enter Email id" required>
+					  	</div>	
+			  		</div>
+			  		<div class="col-md-6">
+			  			<div class="form-group">
+			  				<label for ="description"> Message</label>
+			  			 	<textarea class="form-control" id="message" name="message" placeholder="Enter Your Message" required></textarea>
+			  			</div>
+			  			<div>
+			  				<button type="submit" id="submit" class="btn btn-default submit"><i id="loader" class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
+			  			</div>
+					</div>
+				</form>
+			</div>
+        </section>
+        <script>
+            //Insert your lambda function URL here
+            var URL = "https://xxxxxxx.execute-api.xxxxxx.amazonaws.com/development/sendMail";
+        </script>
+        <script src="js/script.js"></script>
+    </body>
+</html>
