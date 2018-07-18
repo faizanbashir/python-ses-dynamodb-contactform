@@ -17,17 +17,20 @@ service: python-sesdynamodb-contactform
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+custom:
+  secrets: ${file(secrets.json)}
+
 provider:
   name: aws
   runtime: python2.7
-  region: <region>
-  profile: <user>
+  region: ${self:custom.secrets.REGION}
+  profile: ${self:custom.secrets.PROFILE}
   stage: development
   memory: 128
   timeout: 10
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
-    SENDER_EMAIL: <verified-email-address>
+    SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
     EMAIL_SUBJECT: Serverless Mail
     CONFIG_SET: ConfigSet
   iamRoleStatements:
