@@ -27,7 +27,7 @@ provider:
   profile: ${self:custom.secrets.PROFILE}
   stage: development
   memory: 128
-  timeout: 10
+  timeout: 30
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
