@@ -31,7 +31,7 @@ provider:
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
-    EMAIL_SUBJECT: Serverless Mail
+    EMAIL_SUBJECT: Main from mintmesh.ai
     CONFIG_SET: ConfigSet
   iamRoleStatements:
     - Effect: "Allow"
