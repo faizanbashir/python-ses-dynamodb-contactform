@@ -22,7 +22,7 @@ custom:
 
 provider:
   name: aws
-  runtime: python2.7
+  runtime: python3.6
   region: ${self:custom.secrets.REGION}
   profile: ${self:custom.secrets.PROFILE}
   stage: development
