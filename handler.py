@@ -63,7 +63,7 @@ def sendMailToUser(data, content):
         Source=sender,
         Destination={
             'ToAddresses': [
-                senders,
+                sender,
             ],
         },
         Message={
