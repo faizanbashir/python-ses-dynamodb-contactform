@@ -27,7 +27,7 @@ provider:
   runtime: python3.6
   region: ${self:custom.secrets.REGION}
   profile: ${self:custom.secrets.PROFILE}
-  stage: production
+  stage: prod
   memory: 128
   timeout: 30
   environment:
