@@ -22,16 +22,17 @@ custom:
 
 provider:
   name: aws
-  runtime: python2.7
+  runtime: python3.6
   region: ${self:custom.secrets.REGION}
   profile: ${self:custom.secrets.PROFILE}
-  stage: development
+  stage: prod
   memory: 128
-  timeout: 10
+  timeout: 30
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
-    EMAIL_SUBJECT: Serverless Mail
+    EMAIL_SUBJECT: Mail from mintmesh.ai
+    SES_REGION: ${self:custom.secrets.SES_REGION, 'us-east-1'}
     CONFIG_SET: ConfigSet
   iamRoleStatements:
     - Effect: "Allow"

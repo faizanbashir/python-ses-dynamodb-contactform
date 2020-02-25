@@ -6,7 +6,7 @@ import time
 import uuid
 import decimal
 
-client = boto3.client('ses')
+client = boto3.client('ses', region_name=os.environ['SES_REGION'])
 sender = os.environ['SENDER_EMAIL']
 subject = os.environ['EMAIL_SUBJECT']
 configset = os.environ['CONFIG_SET']
@@ -19,7 +19,7 @@ def sendMail(event, context):
 
     try:
         data = event['body']
-        content = 'Message from ' + data['firstname'] + ' ' + data['lastname'] + ',\nMessage Contents: ' + data['message']
+        content = 'Sender Email: ' + data['email'] + ',\nMessage from ' + data['firstname'] + ' ' + data['lastname'] + ',\nMessage Contents: ' + data['message']
         saveToDynamoDB(data)
         response = sendMailToUser(data, content)
     except ClientError as e:
@@ -63,7 +63,7 @@ def sendMailToUser(data, content):
         Source=sender,
         Destination={
             'ToAddresses': [
-                data['email'],
+                sender,
             ],
         },
         Message={
