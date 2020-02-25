@@ -16,11 +16,11 @@ $(function(){
             },
             success: function(data) {
                 console.log(data);
-                $('#status').text('Mail sent!').show();
+                $('#status').text(data).show();
                 $('#submit').removeProp('disabled');
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                $('#status').text('Mail sending Failed').show();
+                $('#status').text('Mail sending Failed. Error: ' + jqXHR.status).show();
                 $('#submit').removeProp('disabled');
             }
         });
