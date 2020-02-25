@@ -1,3 +1,5 @@
+org: faizanibnbashir
+app: mm-contact-form
 # Welcome to Serverless!
 #
 # This file is the main config file for your service.
@@ -32,6 +34,7 @@ provider:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
     EMAIL_SUBJECT: Mail from mintmesh.ai
+    SES_REGION: ${self:custom.secrets.SES_REGION, 'us-east-1'}
     CONFIG_SET: ConfigSet
   iamRoleStatements:
     - Effect: "Allow"
