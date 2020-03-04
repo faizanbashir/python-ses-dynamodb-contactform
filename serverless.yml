@@ -17,15 +17,23 @@ service: python-sesdynamodb-contactform
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+plugins:
+  - serverless-domain-manager
+
 custom:
   secrets: ${file(secrets.json)}
+  customDomain:
+    domainName: ${self:custom.secrets.DOMAIN}
+    certificateName: ${self:custom.secrets.CERTIFICATE}
+    stage: ${self:provider.stage}
+    createRoute53Record: true
 
 provider:
   name: aws
   runtime: python3.6
   region: ${self:custom.secrets.REGION}
   profile: ${self:custom.secrets.PROFILE}
-  stage: prod
+  stage: ${self:custom.secrets.ENV}
   memory: 128
   timeout: 30
   environment:
@@ -54,8 +62,18 @@ functions:
       - http:
           path: sendMail
           method: post
+          async: false
           integration: lambda
-          cors: true
+          cors:
+            origins: ${self:custom.secrets.ORIGINS}
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
           response:
             headers:
               "Access-Control-Allow_Origin": "'*'"
