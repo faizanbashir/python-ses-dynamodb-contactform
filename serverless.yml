@@ -65,7 +65,8 @@ functions:
           async: false
           integration: lambda
           cors:
-            origins: ${self:custom.secrets.ORIGINS}
+            origins: 
+              - ${self:custom.secrets.ORIGINS.${self:provider.stage}}
             headers:
               - Content-Type
               - X-Amz-Date
@@ -76,7 +77,7 @@ functions:
             allowCredentials: false
           response:
             headers:
-              "Access-Control-Allow_Origin": "'*'"
+              "Access-Control-Allow_Origin": "'${self:custom.secrets.ORIGINS.${self:provider.stage}}'"
   list:
     handler: handler.list
     description: List all the contact form submissions
