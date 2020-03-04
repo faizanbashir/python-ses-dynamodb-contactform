@@ -34,8 +34,8 @@ provider:
   region: ${self:custom.secrets.REGION}
   profile: ${self:custom.secrets.PROFILE}
   stage: ${self:custom.secrets.ENV}
-  memory: 128
-  timeout: 30
+  memory: ${self:custom.secrets.MEMORY}
+  timeout: ${self:custom.secrets.TIMEOUT}
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
