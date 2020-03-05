@@ -13,6 +13,7 @@ AWS SES DYNAMODB tutorial using Serverless Framework written in Python
 |-------|------|
 | `npm install -g serverless` | Install Serverless CLI  |
 | `npm install` | Install Serverless dependencies  |
+| `npm install serverless-domain-manager --save-dev` | Install plugin to use custom domains |
 | Set up an AWS account with admin permissions | [Documentation](https://serverless.com/framework/docs/providers/aws/guide/credentials/)  |
 
 ## How to Deploy
@@ -23,19 +24,24 @@ $ npm install
 $ sls deploy -v
 ```
 
+## Creating Route53 records for custom domain
+```
+$ sls create_domain
+```
+
 ## Service Endpoints
 The service exposes 2 REST API endpoints:
 
 | **Endpoint** |**Description**|**Parameters**|
 |-------|------|------|
-| `POST /sendMail` | Submit the data from contact form  | `{"firstname": "John", "lastname": "Doe", "email": "john@doe.com", "message": "Hi there"}` |
+| `POST /sendMail` | Submit the data from contact form  | `{"firstname": "John Doe", "email": "john@doe.com", "message": "Hi there"}` |
 | `GET /list` | Retrieves all the contact form submissions | - |
 
 ## Invocation
-	curl ---header "Content-Type: application/json" \
+	curl --header "Content-Type: application/json" \
         --request POST \
-        --data '{"firstname": "John", "lastname": "Doe", "email": "john@doe.com", "message": "Hi there"}'\
-        <host>/sendMail
+        --data '{"fullname": "John Doe", "email": "john@doe.com", "message": "Hi there"}'\
+        <host>/sendMail -H 'x-api-key: <API_KEY>'
 	curl <host>/list
 
 # `sls` or `serverless` CLI Usage
