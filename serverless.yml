@@ -84,12 +84,23 @@ functions:
       - http:
           path: list
           method: get
-          integration: lambda
-          cors: true
+          async: false
           private: true
+          integration: lambda
+          cors:
+            origins:
+              - ${self:custom.secrets.ORIGINS.${self:provider.stage}}
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
           response:
             headers:
-              "Access-Control-Allow_Origin": "'*'"
+              "Access-Control-Allow_Origin": "'${self:custom.secrets.ORIGINS.${self:provider.stage}}'"
 
 resources:
   Resources:
