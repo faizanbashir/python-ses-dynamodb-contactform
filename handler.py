@@ -19,7 +19,7 @@ def sendMail(event, context):
 
     try:
         data = event['body']
-        content = 'Sender Email: ' + data['email'] + ',\nMessage from ' + data['firstname'] + ' ' + data['lastname'] + ',\nMessage Contents: ' + data['message']
+        content = 'Sender Email: ' + data['email'] + ',<br> FullName: ' + data['fullname'] + ',<br> Form Type: ' + data['type'] + ',<br> Message Contents: ' + data['message']
         saveToDynamoDB(data)
         response = sendMailToUser(data, content)
     except ClientError as e:
@@ -47,9 +47,9 @@ def saveToDynamoDB(data):
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
     item = {
         'id': str(uuid.uuid1()),
-        'firstname': data['firstname'],
-        'lastname': data['lastname'],
+        'fullname': data['fullname'],
         'email': data['email'],
+        'type': data['type'],
         'message': data['message'],
         'createdAt': timestamp,
         'updatedAt': timestamp
@@ -73,10 +73,6 @@ def sendMailToUser(data, content):
             },
             'Body': {
                 'Html': {
-                    'Charset': charset,
-                    'Data': content
-                },
-                'Text': {
                     'Charset': charset,
                     'Data': content
                 }

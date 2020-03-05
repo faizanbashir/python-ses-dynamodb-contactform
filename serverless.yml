@@ -1,37 +1,43 @@
-# Welcome to Serverless!
-#
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
-#
-# For full config options, check the docs:
-#    docs.serverless.com
-#
-# Happy Coding!
-
 service: python-sesdynamodb-contactform
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+plugins:
+  - serverless-domain-manager
+
 custom:
   secrets: ${file(secrets.json)}
+  customDomain:
+    domainName: ${self:custom.secrets.DOMAIN}
+    certificateName: ${self:custom.secrets.CERTIFICATE}
+    stage: ${self:provider.stage}
+    createRoute53Record: true
 
 provider:
   name: aws
   runtime: python3.6
   region: ${self:custom.secrets.REGION}
   profile: ${self:custom.secrets.PROFILE}
-  stage: prod
-  memory: 128
-  timeout: 30
+  stage: ${self:custom.secrets.ENV}
+  memory: ${self:custom.secrets.MEMORY}
+  timeout: ${self:custom.secrets.TIMEOUT}
+  apiKeys:
+    - ${self:provider.stage}-contactForm
+    - ${self:provider.stage}-list
+  usagePlan:
+    quota:
+      limit: 10000
+      offset: 2
+      period: MONTH
+    throttle:
+      burstLimit: 500
+      rateLimit: 250
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
-    EMAIL_SUBJECT: Mail from mintmesh.ai
+    EMAIL_SUBJECT: ${self:custom.secrets.EMAIL_SUBJECT}
     SES_REGION: ${self:custom.secrets.SES_REGION, 'us-east-1'}
     CONFIG_SET: ConfigSet
   iamRoleStatements:
@@ -54,11 +60,23 @@ functions:
       - http:
           path: sendMail
           method: post
+          async: false
+          private: true
           integration: lambda
-          cors: true
+          cors:
+            origins: 
+              - ${self:custom.secrets.ORIGINS.${self:provider.stage}}
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
           response:
             headers:
-              "Access-Control-Allow_Origin": "'*'"
+              "Access-Control-Allow_Origin": "'${self:custom.secrets.ORIGINS.${self:provider.stage}}'"
   list:
     handler: handler.list
     description: List all the contact form submissions
@@ -66,11 +84,23 @@ functions:
       - http:
           path: list
           method: get
+          async: false
+          private: true
           integration: lambda
-          cors: true
+          cors:
+            origins:
+              - ${self:custom.secrets.ORIGINS.${self:provider.stage}}
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
           response:
             headers:
-              "Access-Control-Allow_Origin": "'*'"
+              "Access-Control-Allow_Origin": "'${self:custom.secrets.ORIGINS.${self:provider.stage}}'"
 
 resources:
   Resources:
