@@ -42,7 +42,7 @@ The service exposes 2 REST API endpoints:
         --request POST \
         --data '{"fullname": "John Doe", "email": "john@doe.com", "message": "Hi there"}'\
         <host>/sendMail -H 'x-api-key: <API_KEY>'
-	curl <host>/list
+	curl <host>/list -H 'x-api-key: <API_KEY>'
 
 # `sls` or `serverless` CLI Usage
 
